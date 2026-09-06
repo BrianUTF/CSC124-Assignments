@@ -1,1 +1,23 @@
+// Week 2: Animal Information Calculator
+// Collect animal data and calculate food requirements
 
+Console.WriteLine("=== Animal Information Entry ===");
+Console.Write("Enter Animal Name:");
+string animalName = Console.ReadLine();
+
+Console.Write($"Enter how many {animalName}s?");
+string input = Console.ReadLine();
+int number = Convert.ToInt32(input);
+
+Console.Write($"Enter amount of food per {animalName},(lbs) per day ?");
+double food = Convert.ToDouble(Console.ReadLine());
+
+double totalDailyFood = food * number;
+
+double weeklyTotal = totalDailyFood * 7;
+Console.WriteLine("=== Animal Summary ===");
+Console.WriteLine($"Animal Name :{animalName}");
+Console.WriteLine($"Count:{number}");
+Console.WriteLine($"Daily Food per animal :{food}(lbs)");
+Console.WriteLine($"Total Daily Food:{totalDailyFood}(lbs)");
+Console.WriteLine($"Weekly Total Food:{weeklyTotal}(lbs)");
