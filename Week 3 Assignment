@@ -1,1 +1,126 @@
+// Week 3: Animal Boarding Validator
+// Validate animal boarding requests using control structures
+// Remove Internal
 
+
+Console.WriteLine("=== Animal Boarding System ===");
+Console.Write("Enter Animal Name:");
+string animalName = Console.ReadLine();
+Console.Write($"Enter {animalName}'s Size -(small/medium/large):");
+// Choose one of the size options
+string size = Console.ReadLine().ToLower();
+Console.Write($"is {animalName}  carnivorous? - yes or no:");
+string Carnivore = Console.ReadLine().ToLower();
+Console.Write($"How many {animalName}s are boarding ? :");
+//  There are certain Max capacity for certain sizes
+// Max Large - 2 , Max Medium - 10 , Max Small - 50
+string input = Console.ReadLine();
+int number = Convert.ToInt32(input);
+int maxLarge = 2;
+int maxMedium = 10;
+int maxSmall = 50;
+
+if (size == "large" && number <= maxLarge)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine("Approved for General Housing on Floor 1");
+    }
+    else
+    {
+        Console.WriteLine("WARNING - Seperate Housing Required on Floor 1 , yet Approved");
+    }
+}
+
+else if (size == "medium" && number <= maxMedium)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine("Approved for General Housing on Floor 2");
+    }
+    else
+    {
+        Console.WriteLine("WARNING - Seperate Housing Required on Floor 2, yet Approved");
+    }
+}
+
+else if (size == "small" && number <= maxSmall)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine("Approved for General Housing on Floor 3");
+    }
+    else
+    {
+        Console.WriteLine("WARNING - Seperate Housing Required on Floor 3, yet Approved");
+    }
+}
+else
+{
+
+    Console.WriteLine(" Cannot Board Check Size Limits ");
+}
+Console.WriteLine("=== Boarding decision ===");
+Console.WriteLine($"Animal Name : {animalName}");
+if (size == "large" && number <= maxLarge)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine(" Status : Approved");
+        Console.WriteLine("Floor Number = 1");
+    }
+    else if (Carnivore == "yes")
+    {
+        Console.WriteLine(" Status Approved");
+        Console.WriteLine("Floor Number = 1");
+        Console.WriteLine("WARNING -Seperated housing required on Floor 1");
+    }
+}
+
+
+else if (size == "meduim" && number <= maxMedium)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine(" Status : Approved");
+        Console.WriteLine("Floor Number = 2");
+    }
+    else if (Carnivore == "yes")
+    {
+        Console.WriteLine(" Status Approved");
+        Console.WriteLine("Floor Number = 2");
+        Console.WriteLine("WARNING -Seperated housing required on Floor 2");
+    }
+}
+else if (size == "small" && number <= maxSmall)
+{
+    if (Carnivore == "no")
+    {
+        Console.WriteLine(" Status : Approved");
+        Console.WriteLine("Floor Number = 3");
+    }
+    else if (Carnivore == "yes")
+    {
+        Console.WriteLine(" Status Approved");
+        Console.WriteLine("Floor Number = 3");
+        Console.WriteLine("WARNING -Seperated housing required on Floor 3");
+    }
+}
+else 
+{
+if (size == "large" && number> maxLarge )
+{
+Console.WriteLine("Status Denied");
+Console.WriteLine($"Reason:Max Large Animals Allowed is 2 , you put {number}");
+}
+else if (size == "medium" && number> maxMedium)
+{
+    Console.WriteLine("Status Denied");
+    Console.WriteLine($"Reason: Max Medium Animals Allowed is 10 , you put {number}");
+}
+else if (size == "small" && number>maxSmall)
+{
+    Console.WriteLine("Status Denied");
+    Console.WriteLine($"Reason : Max Small Animals Allowes is 50 , you put {number}");
+}
+}
