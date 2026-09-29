@@ -1,1 +1,75 @@
+//week 5
+using Internal;
 
+Console.WriteLine("=== Noah's Ark - Functions & Objects ===");
+int animalTypes = 0;
+int totalAnimals = 0;
+double dailyFood = 0;
+int voyageDays = 40;
+bool menu = true;
+while (menu)
+{
+    DisplayMenu();
+    int choice = GetMenuChoice();
+    if (choice == 1)
+    {
+        Console.WriteLine("Adding Animal(s)");
+        Console.WriteLine("Enter how many animals of this type:");
+        int count = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter how much food one animal of this species needs (lbs):");
+        double foodPerAnimal = Convert.ToDouble(Console.ReadLine());
+        animalTypes++;
+        totalAnimals += count;
+        dailyFood += CalculateDailyFood(count, foodPerAnimal);
+        Console.WriteLine("Animal species added !");
+        // inside this if statement , only count and foodPerAnimal exist 
+    }
+    else if (choice == 2)
+    {
+        Console.WriteLine("Viewing Summary");
+        DisplaySummary(animalTypes, totalAnimals, dailyFood, voyageDays);
+
+    }
+    else if (choice == 3)
+    {
+        Console.WriteLine("Exiting , Good Bye !");
+        menu = false;
+    }
+    else
+    {
+        Console.WriteLine("ERROR- Invalid choice");
+    }
+}
+static void DisplayMenu()
+{
+    Console.WriteLine("1.Add Animal");
+    Console.WriteLine("2.View Summary");
+    Console.WriteLine("3.Exit");
+}
+static int GetMenuChoice()
+{
+    Console.WriteLine("Enter Choice");
+    return Convert.ToInt32(Console.ReadLine());
+}
+
+static double CalculateDailyFood(int count, double foodPerAnimal) // This method calcuates the total daily food needed for the ark to feed all animals
+
+{
+    return count * foodPerAnimal; 
+}
+static double CalculateWeeklyFood(double dailyFood)
+{
+    return dailyFood * 7;
+}
+static double CalculateVoyageFood(double dailyFood, int tripDays) // This calcuates the total food need for the 40 day voyage
+{
+    return dailyFood * tripDays;
+}
+static void DisplaySummary(int animalTypes, int totalAnimals, double dailyFood, int voyageDays)
+{
+    Console.WriteLine("\n=== Voyage Summary ===");
+    Console.WriteLine($"animal types: {animalTypes}");
+    Console.WriteLine($"Total Animals On Board :{totalAnimals}");
+    Console.WriteLine($"Total Daily Food:{dailyFood}lbs");
+    Console.WriteLine($"{voyageDays}-Day Food: {CalculateVoyageFood(dailyFood, voyageDays)}lbs");
+}
