@@ -1,1 +1,144 @@
+// Week 6: Animal Collection Manager
+// Use Lists and Dictionaries to manage animal collections
 
+public class Animal
+{
+    public string Name {get; set ;}
+    private int _count;
+    public int Count 
+    {
+        get {return _count;}
+        set 
+        {
+            if (value > 0 )
+            _count = value;
+        }
+    }
+    private double _foodPerDay;
+    public double foodPerDay 
+    {
+        get { return _foodPerDay;}
+        set
+        {
+            if (value > 0)
+            _foodPerDay= value;
+        }
+    }
+
+
+    public bool isCarnivore {get; set; }
+
+    public string Size {get; set; }
+
+    public Animal(string name , int count , double food ,
+    bool Carnivore , string size)
+    {
+        Name = name ; 
+        Count = count; 
+        foodPerDay = food ; 
+        isCarnivore = Carnivore;
+        Size=size;
+    }
+    public double CalculateDailyFood()
+    { 
+        return Count * foodPerDay;
+    }
+    public double CalculateVoyageFood( int voyage)
+    {
+        return CalculateDailyFood() * voyage;
+    }
+    public int GetFloorAssignment()
+    {
+        switch(Size.ToLower())
+        {
+            case "large":return 1;
+            case "medium":return 2;
+            case "small" : return 3;
+            default:return 0;
+        }
+    }
+    public void DisplayInfo()
+    {
+        Console.WriteLine($"Animal: {Name}");
+        Console.WriteLine($"Animals Count : {Count}");
+        Console.WriteLine($"Floor:{GetFloorAssignment()}");
+        Console.WriteLine($"Daily Food :{CalculateDailyFood()}");
+        if (isCarnivore)
+        Console.WriteLine("Warning !!! - Animal inputted is Carnivorous , Seperate housing requiered ");
+    }
+}
+public class FoodSupply
+{
+    public string FoodType{get; set;}
+    public double TotalPounds {get; set;}
+    public double DailyUsage{get; set;}
+    public FoodSupply(string foodType, double totalPounds, double dailyUsage)
+{
+FoodType = foodType;
+TotalPounds = totalPounds;
+DailyUsage = dailyUsage;
+}
+    public double CalculateDaysRemaining()
+    {
+        if(DailyUsage<= 0 )
+     { 
+        return 0;
+     }
+     return TotalPounds/DailyUsage;
+    }
+public void AddSupply(double pounds)
+{
+    TotalPounds+=pounds;
+}
+public void UseSupply(double pounds)
+{
+    TotalPounds-= pounds;
+    if(TotalPounds<0)
+    {
+        TotalPounds = 0;
+    }
+}
+public void DisplayFood()
+{
+    Console.WriteLine($"Food Type : {FoodType}");
+    Console.WriteLine($"Total Pounds of Food : {TotalPounds}");
+    Console.WriteLine($"Daily Usage :{DailyUsage}");
+    Console.WriteLine($"Days Remaining: {CalculateDaysRemaining()}");
+}
+}
+public class Code
+{
+static void Main()
+{
+    Console.WriteLine("=== Noah's Ark Collection Manager ===");
+Animal elephant = new Animal("Elephant", 2, 50, false, "large");
+Animal jaguar = new Animal("Jaguar", 2, 10, true, "medium");
+Animal rabbit = new Animal("Rabbit", 10, 0.5, false, "small");
+Console.WriteLine("==Animals==");
+elephant.DisplayInfo();
+Console.WriteLine($"Voyage Food : {elephant.CalculateVoyageFood(40)}lbs");
+
+jaguar.DisplayInfo();
+Console.WriteLine($"Voyage Food : {jaguar.CalculateVoyageFood(40)}lbs");
+// Attempting using negative numbers 
+Console.WriteLine ("===Test===");
+jaguar.Count=-5; // Should be rejected
+Console.WriteLine($"jaguar Count After Invalid number input: {jaguar.Count}\n");
+rabbit.DisplayInfo();
+Console.WriteLine($"Voyage Food : {rabbit.CalculateVoyageFood(40)}lbs");
+
+FoodSupply crops = new FoodSupply("Crops",2000, 105);
+FoodSupply meat = new FoodSupply("Meat",500,20 );
+Console.WriteLine("=== Food Storage ===");
+crops.DisplayFood();
+meat.DisplayFood();
+Console.WriteLine("=== Storage Status ===");// adding or using supplies
+meat.AddSupply(100);
+meat.UseSupply(20);
+crops.AddSupply(50);
+crops.UseSupply(105);
+crops.DisplayFood();//new status due to adding or using supplies
+meat.DisplayFood();// new status due to adding or using supplies
+
+}
+}
